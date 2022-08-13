@@ -59,7 +59,9 @@ dependencies {
     // With ´implementation´ you include libraries NOT to be inside your .jar file.
     implementation("gg.essential:essential-$platform:4276+g845a16235")
 
-    include("com.github.Shyrogan:Post:1.1.2")
+    include("com.github.Shyrogan:Post:1.1.2") {
+        exclude(group = "org.ow2.asm")
+    }
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
 }
