@@ -21,8 +21,12 @@ public class MixinNetworkManager {
             ),
             cancellable = true
     )
-    private void packetReceived(ChannelHandlerContext p_channelRead0_1_, Packet<?> packet, CallbackInfo ci) {
-        EventPacket event = new EventPacket.Recieve(packet);
+    private void packetReceived(
+            ChannelHandlerContext p_channelRead0_1_,
+            Packet<?> packet,
+            CallbackInfo ci
+    ) {
+        EventPacket event = new EventPacket.Receive(packet);
         SkyBot.INSTANCE.getEventBus().dispatch(event);
 
         if (event.isCancelled()) ci.cancel();

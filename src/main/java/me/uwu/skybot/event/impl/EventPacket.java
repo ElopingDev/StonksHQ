@@ -14,8 +14,8 @@ import net.minecraft.network.Packet;
 public class EventPacket extends Event {
     private Packet<?> packet;
 
-    public static class Recieve extends EventPacket {
-        public Recieve(Packet<?> packet) {
+    public static class Receive extends EventPacket {
+        public Receive(Packet<?> packet) {
             super(packet);
         }
     }

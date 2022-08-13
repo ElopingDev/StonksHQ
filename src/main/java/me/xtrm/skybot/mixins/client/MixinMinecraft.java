@@ -2,6 +2,7 @@ package me.xtrm.skybot.mixins.client;
 
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventKeyboard;
+import me.uwu.skybot.event.impl.EventTick;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -15,6 +16,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinMinecraft {
     @Shadow
     public GuiScreen currentScreen;
+
+    @Inject(
+            method = "runTick",
+            at = @At(
+                    "HEAD"
+            ),
+            cancellable = true
+    )
+    private void onTick(CallbackInfo callbackInfo) {
+        EventTick eventTick = new EventTick();
+        SkyBot.INSTANCE.getEventBus().dispatch(eventTick);
+        if (eventTick.isCancelled()) callbackInfo.cancel();
+    }
 
     @Inject(
             method = "runTick",
