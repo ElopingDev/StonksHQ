@@ -1,22 +1,21 @@
 package me.uwu.skybot.system.module.impl.misc;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
+import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventUpdate;
 import me.xtrm.skybot.system.module.Category;
 import me.xtrm.skybot.system.module.Module;
-import org.lwjgl.input.Keyboard;
+import net.minecraft.util.EnumFacing;
 
 @Module.Metadata(
-        id = "auto-jump",
-        keybind = Keyboard.KEY_P,
+        id = "auto-farm",
         category = Category.MISCELLANEOUS
 )
-public class AutoJump extends Module {
+public class AutoFarm extends Module {
     @Subscribe
     public void onUpdate(EventUpdate.Pre eventUpdate) {
-        if (mc.thePlayer.onGround && mc.thePlayer.jumpTicks == 0) {
-            mc.thePlayer.jump();
-        }
-        mc.gameSettings.keyBindJump.pressed = false;
+        EnumFacing facing = EnumFacing.values()[SkyBot.INSTANCE.getConfig().enumFacingOrd + 2];
+        mc.thePlayer.rotationYaw = facing.getHorizontalIndex() * 90;
+        mc.thePlayer.rotationPitch = -3.1f;
     }
 }

@@ -4,6 +4,8 @@ import gg.essential.api.commands.Command;
 import gg.essential.api.commands.SubCommand;
 import gg.essential.api.utils.GuiUtil;
 import me.uwu.skybot.SkyBot;
+import me.uwu.skybot.system.module.impl.misc.AutoFarm;
+import me.xtrm.skybot.system.module.ModuleManager;
 
 import java.util.Objects;
 
@@ -29,10 +31,18 @@ public class SkyBotCommand extends Command {
     }
 
     @SubCommand(
+            value = "farm",
+            description = "Starts farming."
+    )
+    public void farm() {
+        ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(true);
+    }
+
+    @SubCommand(
             value = "stop",
             description = "Stops the bot."
     )
     public void stop() {
-        // oui
+        ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(false);
     }
 }
