@@ -15,12 +15,14 @@ pluginManagement {
 }
 
 rootProject.buildFileName = "root.gradle.kts"
-rootProject.name = "ForgeTemplate"
+rootProject.name = "SkyBot"
 
-val mcVersion = "1.8.9"
-
-include(":$mcVersion")
-project(":$mcVersion").apply {
-    projectDir = file("versions/$mcVersion")
-    buildFileName = "../../build.gradle.kts"
+arrayOf(
+    "1.8.9"
+).forEach { mcVersion ->
+    include(":$mcVersion")
+    project(":$mcVersion").apply {
+        projectDir = file("versions/$mcVersion")
+        buildFileName = "../../build.gradle.kts"
+    }
 }
