@@ -67,12 +67,15 @@ dependencies {
 }
 
 tasks {
+    val include by configurations
     compileJava {
         sourceCompatibility = JavaVersion.VERSION_1_8.toString()
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
         options.encoding = "UTF-8"
     }
     withType<Jar> {
+        from(include.map { if (it.isDirectory) it else zipTree(it) })
+
         manifest.attributes(
             mapOf(
                 "ModSide" to "CLIENT",
