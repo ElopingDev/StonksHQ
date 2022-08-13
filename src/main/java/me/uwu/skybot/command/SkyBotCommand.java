@@ -14,7 +14,6 @@ public class SkyBotCommand extends Command {
 
     @SubCommand(
             value = "gui",
-            aliases = {"config", "ui", "open"},
             description = "Open the configuration gui."
     )
     public void openGui() {
@@ -23,7 +22,6 @@ public class SkyBotCommand extends Command {
 
     @SubCommand(
             value = "start",
-            aliases = {"run", "go"},
             description = "Starts the bot."
     )
     public void start() {
@@ -32,7 +30,6 @@ public class SkyBotCommand extends Command {
 
     @SubCommand(
             value = "stop",
-            aliases = {"end"},
             description = "Stops the bot."
     )
     public void stop() {
