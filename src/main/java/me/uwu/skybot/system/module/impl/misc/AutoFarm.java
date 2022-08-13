@@ -5,6 +5,7 @@ import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventRender;
 import me.uwu.skybot.event.impl.EventUpdate;
 import me.uwu.skybot.utils.Timer;
+import me.xtrm.skybot.accessor.IKeyBinding;
 import me.xtrm.skybot.system.module.Category;
 import me.xtrm.skybot.system.module.Module;
 import me.xtrm.skybot.utils.Renderer;
@@ -31,16 +32,16 @@ public class AutoFarm extends Module {
     @Override
     public void onDisable() {
         super.onDisable();
-        mc.gameSettings.keyBindForward.pressed = false;
-        mc.gameSettings.keyBindBack.pressed = false;
-        mc.gameSettings.keyBindLeft.pressed = false;
-        mc.gameSettings.keyBindRight.pressed = false;
-        mc.gameSettings.keyBindAttack.pressed = false;
+        ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(false);
+        ((IKeyBinding) mc.gameSettings.keyBindBack).sb$setPressed(false);
+        ((IKeyBinding) mc.gameSettings.keyBindLeft).sb$setPressed(false);
+        ((IKeyBinding) mc.gameSettings.keyBindRight).sb$setPressed(false);
+        ((IKeyBinding) mc.gameSettings.keyBindAttack).sb$setPressed(false);
     }
 
     @Subscribe
     public void onUpdate(EventUpdate.Pre eventUpdate) {
-        mc.gameSettings.keyBindAttack.pressed = true;
+        ((IKeyBinding)mc.gameSettings.keyBindAttack).sb$setPressed(true);
 
         EnumFacing facing = EnumFacing.values()[SkyBot.INSTANCE.getConfig().enumFacingOrd + 2];
         BlockPos[] pos = getPositions();
@@ -53,19 +54,18 @@ public class AutoFarm extends Module {
 
         Block bottomBlock = mc.theWorld.getBlockState(bottomPos).getBlock();
 
-        System.out.println(bottomBlock.getLocalizedName() + "cc");
-
         if (dodo > 0) {
             dodo--;
             //mc.gameSettings.keyBindRight.pressed = false;
             //mc.gameSettings.keyBindLeft.pressed = false;
         } else {
             if (bottomBlock.getUnlocalizedName().contains("Portal")) {
-                mc.gameSettings.keyBindRight.pressed = false;
-                mc.gameSettings.keyBindLeft.pressed = false;
-                mc.gameSettings.keyBindJump.pressed = true;
+                ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(false);
+                ((IKeyBinding)mc.gameSettings.keyBindLeft).sb$setPressed(false);
+                ((IKeyBinding)mc.gameSettings.keyBindJump).sb$setPressed(true);
             } else {
-                mc.gameSettings.keyBindJump.pressed = false;
+                ((IKeyBinding)mc.gameSettings.keyBindJump).sb$setPressed(false);
+
                 if (goRight) {
                     if (mc.thePlayer.isCollidedHorizontally && !mc.theWorld.isAirBlock(pos[1])) {
                         goRight = !goRight;
@@ -82,15 +82,15 @@ public class AutoFarm extends Module {
 
         if (dodo <= 0) {
             if (goRight) {
-                mc.gameSettings.keyBindRight.pressed = true;
-                mc.gameSettings.keyBindLeft.pressed = false;
+                ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(true);
+                ((IKeyBinding)mc.gameSettings.keyBindLeft).sb$setPressed(false);
             } else {
-                mc.gameSettings.keyBindRight.pressed = false;
-                mc.gameSettings.keyBindLeft.pressed = true;
+                ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(false);
+                ((IKeyBinding)mc.gameSettings.keyBindLeft).sb$setPressed(true);
             }
         }
 
-        mc.gameSettings.keyBindForward.pressed = true;
+        ((IKeyBinding)mc.gameSettings.keyBindForward).sb$setPressed(true);
 
         mc.thePlayer.rotationYaw = facing.getHorizontalIndex() * 90;
         mc.thePlayer.rotationPitch = -3.1f;
@@ -114,7 +114,6 @@ public class AutoFarm extends Module {
         fr.drawStringWithShadow("floord => " + floor, 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
         fr.drawStringWithShadow("Go => " + (goRight ? "right" : "left"), 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
         fr.drawStringWithShadow("Dodo => " + (dodo > 0), 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
-
     }
 
     @Subscribe

@@ -11,7 +11,8 @@
     "client.entity.MixinEntityPlayerSP",
     "client.gui.MixinGuiIngame",
     "client.gui.MixinGuiSpectator",
-    "client.renderer.MixinEntityRenderer"
+    "client.renderer.MixinEntityRenderer",
+    "client.settings.MixinKeyBinding"
   ],
   "mixins": [
     "entity.MixinEntity",

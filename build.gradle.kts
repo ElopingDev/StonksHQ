@@ -16,8 +16,6 @@ group = modGroup
 base.archivesName.set(modBaseName)
 version = "1.0.0"
 
-val accessTransformerName = "${modId}1${platform.mcMinor}_at.cfg"
-
 loom {
     noServerRunConfigs()
     launchConfigs {
@@ -26,11 +24,8 @@ loom {
             arg("--mixin", "$modId.mixins.json")
         }
     }
-    forge {
-        accessTransformer(rootProject.file("src/main/resources/$accessTransformerName"))
-    }
     mixin {
-        defaultRefmapName.set("patcher.mixins.refmap.json")
+        defaultRefmapName.set("$modId.mixins.refmap.json")
     }
 }
 
@@ -72,24 +67,15 @@ dependencies {
 }
 
 tasks {
-    val include: Configuration by configurations
-
     compileJava {
         sourceCompatibility = JavaVersion.VERSION_1_8.toString()
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
         options.encoding = "UTF-8"
     }
     withType<Jar> {
-        from(include.map { if (it.isDirectory) it else zipTree(it) }) {
-            filesMatching(accessTransformerName) {
-                name = "META-INF/$name"
-            }
-        }
-
         manifest.attributes(
             mapOf(
                 "ModSide" to "CLIENT",
-                "FMLAT" to accessTransformerName,
                 "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
                 "TweakOrder" to "0",
                 "MixinConfigs" to "$modId.mixins.json"
