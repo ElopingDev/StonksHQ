@@ -79,7 +79,7 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
         options.encoding = "UTF-8"
     }
-    jar {
+    withType<Jar> {
         from(include.files.map { zipTree(it) }) {
             filesMatching(accessTransformerName) { name = "META-INF/$name" }
         }
