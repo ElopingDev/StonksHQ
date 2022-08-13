@@ -7,8 +7,8 @@ import me.uwu.skybot.event.Event;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class EventTick extends Event {
+public class EventUpdate extends Event {
     @Cancellable
-    public static class Pre extends EventTick {}
-    public static class Post extends EventTick {}
+    public static class Pre extends EventUpdate {}
+    public static class Post extends EventUpdate {}
 }

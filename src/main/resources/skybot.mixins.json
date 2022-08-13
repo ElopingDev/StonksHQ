@@ -2,13 +2,18 @@
   "package": "me.xtrm.skybot.mixins",
   "refmap": "skybot.mixins.refmap.json",
   "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8.0",
   "overwrites": {
     "conformVisibility": true
   },
   "client": [
-    "client.MixinMinecraft"
+    "client.MixinMinecraft",
+    "client.entity.MixinEntityPlayerSP",
+    "client.gui.MixinGuiIngame",
+    "client.gui.MixinGuiSpectator"
   ],
   "mixins": [
+    "entity.MixinEntity",
     "network.MixinNetworkManager"
   ]
 }

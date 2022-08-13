@@ -63,6 +63,8 @@ dependencies {
         exclude(group = "org.ow2.asm")
     }
 
+    include("org.reflections:reflections:0.10.2")
+
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
 
     compileOnly("org.projectlombok:lombok:1.18.24")

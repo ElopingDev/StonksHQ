@@ -1,13 +1,14 @@
 package me.uwu.skybot;
 
 import fr.shyrogan.post.EventBus;
-import gg.essential.api.EssentialAPI;
 import lombok.Getter;
-import me.uwu.skybot.command.SkyBotCommand;
+import lombok.extern.log4j.Log4j2;
 import me.uwu.skybot.event.bus.SkyBotBusConfiguration;
 import me.xtrm.skybot.config.SkyBotConfig;
+import me.xtrm.skybot.system.module.ModuleManager;
 
 @Getter
+@Log4j2(topic = "SkyBot")
 public enum SkyBot {
     INSTANCE;
 
@@ -21,6 +22,6 @@ public enum SkyBot {
     public void initialize() {
         this.config = new SkyBotConfig();
 
-        EssentialAPI.getCommandRegistry().registerCommand(new SkyBotCommand());
+        ModuleManager.INSTANCE.initialize();
     }
 }
