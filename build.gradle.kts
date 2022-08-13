@@ -40,9 +40,11 @@ blossom {
     replaceToken("@ID@", modId)
 }
 
-//Creates a configuration called `include` to declare dependencies
-val include: Configuration by configurations.creating
-configurations.implementation.get().extendsFrom(include)
+configurations {
+    // Creates a configuration called `include` to declare dependencies
+    val include: Configuration by creating
+    implementation.get().extendsFrom(include)
+}
 
 repositories {
     maven("https://repo.essential.gg/repository/maven-public/")
@@ -50,15 +52,19 @@ repositories {
 }
 
 dependencies {
-    //With ´include´ you include libraries to be inside your .jar file.
+    val include: Configuration by configurations
+
+    // With ´include´ you include libraries to be inside your .jar file.
     include("gg.essential:loader-launchwrapper:1.1.3")
-    //With ´implementation´ you include libraries NOT to be inside your .jar file.
+    // With ´implementation´ you include libraries NOT to be inside your .jar file.
     implementation("gg.essential:essential-$platform:4276+g845a16235")
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
 }
 
 tasks {
+    val include: Configuration by configurations
+
     compileJava {
         sourceCompatibility = JavaVersion.VERSION_1_8.toString()
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
