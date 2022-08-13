@@ -64,6 +64,9 @@ dependencies {
     }
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
+
+    compileOnly("org.projectlombok:lombok:1.18.24")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
 }
 
 tasks {
@@ -77,12 +80,14 @@ tasks {
     jar {
         from(include.files.map { zipTree(it) })
 
-        manifest.attributes(mapOf(
-            "ModSide" to "CLIENT",
-            "FMLAT" to accessTransformerName,
-            "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
-            "TweakOrder" to "0",
-            "MixinConfigs" to "$modId.mixins.json"
-        ))
+        manifest.attributes(
+            mapOf(
+                "ModSide" to "CLIENT",
+                "FMLAT" to accessTransformerName,
+                "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
+                "TweakOrder" to "0",
+                "MixinConfigs" to "$modId.mixins.json"
+            )
+        )
     }
 }
