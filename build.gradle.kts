@@ -79,6 +79,9 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
         options.encoding = "UTF-8"
     }
+    processResources {
+        rename("(.+_at.cfg)", "META-INF/$1")
+    }
     jar {
         from(include.files.map { zipTree(it) })
 
