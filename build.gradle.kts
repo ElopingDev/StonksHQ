@@ -80,7 +80,7 @@ tasks {
         options.encoding = "UTF-8"
     }
     processResources {
-        rename("(.*)_at.cfg", "META-INF/$1")
+        rename(accessTransformerName, "META-INF/$accessTransformerName")
     }
     jar {
         from(include.files.map { zipTree(it) })
