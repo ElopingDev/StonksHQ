@@ -79,11 +79,10 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_1_8.toString()
         options.encoding = "UTF-8"
     }
-    processResources {
-        rename(accessTransformerName, "META-INF/$accessTransformerName")
-    }
     jar {
-        from(include.files.map { zipTree(it) })
+        from(include.files.map { zipTree(it) }) {
+            filesMatching(accessTransformerName) { name = "META-INF/$name" }
+        }
 
         manifest.attributes(
             mapOf(
