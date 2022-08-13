@@ -16,6 +16,16 @@ public class SkyBotConfig extends Vigilant {
     )
     public boolean active = true;
 
+    @Property(
+            type = PropertyType.SELECTOR,
+            name = "Selector with many options",
+            description = "A selector property which has a large number of options",
+            category = "Property Deep-Dive",
+            subcategory = "Selectors",
+            options = {"North", "South", "East", "West"}
+    )
+    public int enumFacingOrd = 0;
+
     public SkyBotConfig() {
         super(
                 new File("./config/skybot.toml"),
