@@ -80,8 +80,10 @@ tasks {
         options.encoding = "UTF-8"
     }
     withType<Jar> {
-        from(include.files.map { zipTree(it) }) {
-            filesMatching(accessTransformerName) { name = "META-INF/$name" }
+        from(include.map { if (it.isDirectory) it else zipTree(it) }) {
+            filesMatching(accessTransformerName) {
+                name = "META-INF/$name"
+            }
         }
 
         manifest.attributes(
