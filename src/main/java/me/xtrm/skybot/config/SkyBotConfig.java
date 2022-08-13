@@ -12,17 +12,16 @@ public class SkyBotConfig extends Vigilant {
             type = PropertyType.SWITCH,
             name = "Active",
             description = "Whether the bot is active or not.",
-            category = "Bot"
+            category = "General"
     )
     public boolean active = true;
 
     @Property(
             type = PropertyType.SELECTOR,
-            name = "Selector with many options",
-            description = "A selector property which has a large number of options",
-            category = "Property Deep-Dive",
-            subcategory = "Selectors",
-            options = {"North", "South", "East", "West"}
+            name = "Facing",
+            description = "Where the fuck to look at",
+            category = "Auto Farm",
+            options = {"North", "South", "West", "East"}
     )
     public int enumFacingOrd = 0;
 

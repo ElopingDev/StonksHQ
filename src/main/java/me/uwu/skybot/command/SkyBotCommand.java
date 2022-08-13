@@ -1,6 +1,7 @@
 package me.uwu.skybot.command;
 
 import gg.essential.api.commands.Command;
+import gg.essential.api.commands.DefaultHandler;
 import gg.essential.api.commands.SubCommand;
 import gg.essential.api.utils.GuiUtil;
 import me.uwu.skybot.SkyBot;
@@ -14,6 +15,7 @@ public class SkyBotCommand extends Command {
         super("skybot", true);
     }
 
+    @DefaultHandler
     @SubCommand(
             value = "gui",
             description = "Open the configuration gui."
