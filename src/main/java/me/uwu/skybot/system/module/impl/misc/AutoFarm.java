@@ -1,7 +1,9 @@
 package me.uwu.skybot.system.module.impl.misc;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
+import gg.essential.api.EssentialAPI;
 import me.uwu.skybot.SkyBot;
+import me.uwu.skybot.event.impl.EventPacket;
 import me.uwu.skybot.event.impl.EventRender;
 import me.uwu.skybot.event.impl.EventUpdate;
 import me.uwu.skybot.utils.Timer;
@@ -10,22 +12,28 @@ import me.xtrm.skybot.system.module.Category;
 import me.xtrm.skybot.system.module.Module;
 import me.xtrm.skybot.utils.Renderer;
 import net.minecraft.block.Block;
+import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 
 import java.awt.*;
+import java.util.Random;
 
 @Module.Metadata(id = "auto-farm", category = Category.MISCELLANEOUS)
 public class AutoFarm extends Module {
     private final Timer timer = new Timer();
+    float rng = 0.00041f;
     private int dodo = 0;
     private boolean goRight = true;
+    private boolean stuck = false;
 
     @Override
     public void onEnable() {
         super.onEnable();
+        rng = new Random().nextFloat();
         goRight = true;
     }
 
@@ -59,7 +67,7 @@ public class AutoFarm extends Module {
             //mc.gameSettings.keyBindRight.pressed = false;
             //mc.gameSettings.keyBindLeft.pressed = false;
         } else {
-            if (bottomBlock.getUnlocalizedName().contains("Portal")) {
+            if (bottomBlock.getUnlocalizedName().contains("Portal") && mc.thePlayer.onGround) {
                 ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(false);
                 ((IKeyBinding)mc.gameSettings.keyBindLeft).sb$setPressed(false);
                 ((IKeyBinding)mc.gameSettings.keyBindJump).sb$setPressed(true);
@@ -90,9 +98,11 @@ public class AutoFarm extends Module {
             }
         }
 
-        ((IKeyBinding)mc.gameSettings.keyBindForward).sb$setPressed(true);
+        if (!stuck)
+            ((IKeyBinding)mc.gameSettings.keyBindForward).sb$setPressed(true);
+        else stuck = false;
 
-        mc.thePlayer.rotationYaw = facing.getHorizontalIndex() * 90;
+        mc.thePlayer.rotationYaw = (facing.getHorizontalIndex() * 90) + rng;
         mc.thePlayer.rotationPitch = -3.1f;
     }
 
@@ -175,5 +185,18 @@ public class AutoFarm extends Module {
         positions[1] = playerPos.offset(sides[1]);
 
         return positions;
+    }
+
+    @Subscribe
+    public void onPacket(EventPacket.Receive eventPacket) {
+        if (eventPacket.getPacket() instanceof S08PacketPlayerPosLook) {
+            stuck = true;
+            dodo = 5;
+            ((IKeyBinding)mc.gameSettings.keyBindLeft).sb$setPressed(false);
+            ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(false);
+            ((IKeyBinding)mc.gameSettings.keyBindForward).sb$setPressed(false);
+            ((IKeyBinding)mc.gameSettings.keyBindBack).sb$setPressed(true);
+            EssentialAPI.getNotifications().push("Watchdog", "you where stuck in a block");
+        }
     }
 }
