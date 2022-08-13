@@ -16,8 +16,15 @@ public class MixinGuiIngame {
     @Unique
     private static final EventBus BUS = SkyBot.INSTANCE.getEventBus();
 
-    @Inject(method = "renderTooltip", at = @At("RETURN"))
+    @Inject(
+            method = "renderTooltip",
+            at = @At("RETURN"),
+            cancellable = true
+    )
     public void renderHotbar(ScaledResolution sr, float partialTicks, CallbackInfo ci) {
-        BUS.dispatch(new EventRender.R2D(sr, partialTicks));
+        EventRender eventRender = new EventRender.R2D(sr, partialTicks);
+        BUS.dispatch(eventRender);
+        if (eventRender.isCancelled())
+            ci.cancel();
     }
 }

@@ -3,11 +3,13 @@ package me.uwu.skybot.event.impl;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import me.uwu.skybot.event.Cancellable;
 import me.uwu.skybot.event.Event;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 
 @Data
+@Cancellable
 @EqualsAndHashCode(callSuper = true)
 public class EventRender extends Event {
     private final float partialTicks;
@@ -23,6 +25,12 @@ public class EventRender extends Event {
 
         public R2D(float partialTicks) {
             this(new ScaledResolution(Minecraft.getMinecraft()), partialTicks);
+        }
+    }
+
+    public static class R3D extends EventRender {
+        public R3D(float partialTicks) {
+            super(partialTicks);
         }
     }
 }

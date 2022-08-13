@@ -10,7 +10,8 @@
     "client.MixinMinecraft",
     "client.entity.MixinEntityPlayerSP",
     "client.gui.MixinGuiIngame",
-    "client.gui.MixinGuiSpectator"
+    "client.gui.MixinGuiSpectator",
+    "client.renderer.MixinEntityRenderer"
   ],
   "mixins": [
     "entity.MixinEntity",
