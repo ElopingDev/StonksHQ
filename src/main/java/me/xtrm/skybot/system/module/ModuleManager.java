@@ -53,6 +53,15 @@ public enum ModuleManager {
         return this.moduleMap.get(id);
     }
 
+    @SuppressWarnings("unchecked")
+    public <T extends Module> T typed(Class<T> type) {
+        return (T) this.moduleMap.values()
+                .stream()
+                .filter(it -> it.getClass() == type)
+                .findFirst()
+                .orElse(null);
+    }
+
     @Subscribe
     public void onKey(EventKeyboard eventKeyboard) {
         this.moduleMetadataMap.entrySet()
