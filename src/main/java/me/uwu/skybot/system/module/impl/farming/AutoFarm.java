@@ -1,4 +1,4 @@
-package me.uwu.skybot.system.module.impl.misc;
+package me.uwu.skybot.system.module.impl.farming;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
 import gg.essential.api.EssentialAPI;
@@ -12,7 +12,6 @@ import me.xtrm.skybot.system.module.Category;
 import me.xtrm.skybot.system.module.Module;
 import me.xtrm.skybot.utils.Renderer;
 import net.minecraft.block.Block;
-import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -22,10 +21,15 @@ import net.minecraft.util.MathHelper;
 import java.awt.*;
 import java.util.Random;
 
-@Module.Metadata(id = "auto-farm", category = Category.MISCELLANEOUS)
+@Module.Metadata(
+        id = "auto-farm",
+        category = Category.FARMING
+)
 public class AutoFarm extends Module {
+    private static final Random RANDOM = new Random();
+
     private final Timer timer = new Timer();
-    float rng = 0.00041f;
+    private float rng;
     private int dodo = 0;
     private boolean goRight = true;
     private boolean stuck = false;
@@ -33,7 +37,7 @@ public class AutoFarm extends Module {
     @Override
     public void onEnable() {
         super.onEnable();
-        rng = new Random().nextFloat();
+        rng = RANDOM.nextFloat();
         goRight = true;
     }
 
@@ -64,8 +68,6 @@ public class AutoFarm extends Module {
 
         if (dodo > 0) {
             dodo--;
-            //mc.gameSettings.keyBindRight.pressed = false;
-            //mc.gameSettings.keyBindLeft.pressed = false;
         } else {
             if (bottomBlock.getUnlocalizedName().contains("Portal") && mc.thePlayer.onGround) {
                 ((IKeyBinding)mc.gameSettings.keyBindRight).sb$setPressed(false);
@@ -106,6 +108,7 @@ public class AutoFarm extends Module {
         mc.thePlayer.rotationPitch = -3.1f;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Subscribe
     public void onRender2D(EventRender.R2D eventRender) {
         int i = 0;
@@ -123,7 +126,7 @@ public class AutoFarm extends Module {
         );
         fr.drawStringWithShadow("floord => " + floor, 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
         fr.drawStringWithShadow("Go => " + (goRight ? "right" : "left"), 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
-        fr.drawStringWithShadow("Dodo => " + (dodo > 0), 2, 2 + (i++ * fr.FONT_HEIGHT), -1);
+        fr.drawStringWithShadow("Dodo => " + (dodo > 0), 2, 2 + (i * fr.FONT_HEIGHT), -1);
     }
 
     @Subscribe

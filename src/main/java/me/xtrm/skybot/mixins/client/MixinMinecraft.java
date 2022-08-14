@@ -4,6 +4,7 @@ import fr.shyrogan.post.EventBus;
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventKeyboard;
 import me.uwu.skybot.event.impl.EventTick;
+import me.xtrm.skybot.accessor.IMinecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -15,12 +16,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class MixinMinecraft {
+public class MixinMinecraft implements IMinecraft {
     @Unique
     private static final EventBus BUS = SkyBot.INSTANCE.getEventBus();
 
     @Shadow
     public GuiScreen currentScreen;
+
+    @Shadow
+    private int rightClickDelayTimer;
 
     @Inject(
             method = "runTick",
@@ -63,5 +67,10 @@ public class MixinMinecraft {
                     )
             );
         }
+    }
+
+    @Override
+    public void sb$setRightClickDelayTimer(int value) {
+        this.rightClickDelayTimer = value;
     }
 }

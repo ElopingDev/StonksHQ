@@ -1,13 +1,12 @@
 package me.uwu.skybot.command;
 
+import gg.essential.api.EssentialAPI;
 import gg.essential.api.commands.Command;
 import gg.essential.api.commands.DefaultHandler;
 import gg.essential.api.commands.SubCommand;
 import gg.essential.api.utils.GuiUtil;
 import me.uwu.skybot.SkyBot;
-import me.uwu.skybot.system.module.impl.misc.AutoFarm;
-import me.uwu.skybot.system.module.impl.misc.Tester;
-import me.xtrm.skybot.system.module.ModuleManager;
+import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Objects;
 
@@ -26,35 +25,19 @@ public class SkyBotCommand extends Command {
     }
 
     @SubCommand(
-            value = "start",
-            description = "Starts the bot."
-    )
-    public void start() {
-        // oui
-    }
-
-    @SubCommand(
             value = "farm",
-            description = "Starts farming."
+            description = "Toggles farming."
     )
     public void farm() {
-        ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(true);
-    }
-
-    @SubCommand(
-            value = "test",
-            description = "DO NOT USE THIS COMMAND !!!"
-    )
-    public void test() {
-        ModuleManager.INSTANCE.typed(Tester.class).setEnabled(true);
-    }
-
-    @SubCommand(
-            value = "stop",
-            description = "Stops the bot."
-    )
-    public void stop() {
-        ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(false);
-        ModuleManager.INSTANCE.typed(Tester.class).setEnabled(false);
+        boolean value = !SkyBot.INSTANCE.getConfig().autoFarm;
+        SkyBot.INSTANCE.getConfig().autoFarm = value;
+        EssentialAPI.getNotifications().push(
+                "Auto Farm",
+                "Farmbot is now " + (
+                        value
+                                ? EnumChatFormatting.GREEN + "enabled"
+                                : EnumChatFormatting.RED + "disabled"
+                ) + EnumChatFormatting.RESET + "."
+        );
     }
 }
