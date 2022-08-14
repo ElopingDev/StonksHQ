@@ -100,9 +100,15 @@ public class AutoFarm extends Module {
             }
         }
 
-        if (!stuck)
-            ((IKeyBinding)mc.gameSettings.keyBindForward).sb$setPressed(true);
-        else stuck = false;
+        if (!stuck) {
+            ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(true);
+            ((IKeyBinding) mc.gameSettings.keyBindBack).sb$setPressed(false);
+        }else {
+            stuck = false;
+            ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(false);
+            ((IKeyBinding) mc.gameSettings.keyBindBack).sb$setPressed(true);
+        }
+
 
         mc.thePlayer.rotationYaw = (facing.getHorizontalIndex() * 90) + rng;
         mc.thePlayer.rotationPitch = -3.1f;
