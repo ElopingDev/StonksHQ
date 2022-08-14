@@ -29,17 +29,17 @@ public class SkyBotCommand extends Command {
 
     @SubCommand(
             value = "farm",
-            description = "Toggles farming."
+            description = "TOwOggles FAwArming."
     )
     public void farm() {
         boolean value = !SkyBot.INSTANCE.getConfig().autoFarm;
         SkyBot.INSTANCE.getConfig().autoFarm = value;
         EssentialAPI.getNotifications().push(
-                "Auto Farm",
+                "AutOwO FAwArm",
                 "Farmbot is now " + (
                         value
-                                ? EnumChatFormatting.GREEN + "enabled"
-                                : EnumChatFormatting.RED + "disabled"
+                                ? EnumChatFormatting.LIGHT_PURPLE + "EnAwAbled"
+                                : EnumChatFormatting.RED + "DisAwAbled"
                 ) + EnumChatFormatting.RESET + "."
         );
         ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(value);

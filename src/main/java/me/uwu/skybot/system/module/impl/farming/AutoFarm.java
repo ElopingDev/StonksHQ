@@ -58,7 +58,6 @@ public class AutoFarm extends Module {
 
     @Subscribe
     public void onPre(EventUpdate.Pre e) {
-        mc.thePlayer.rotationYaw = (EnumFacing.values()[SkyBot.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
         //mc.thePlayer.rotationPitch = -3.1f;
 
         BlockPos bottomPos = new BlockPos(
@@ -75,6 +74,7 @@ public class AutoFarm extends Module {
         ((IKeyBinding) mc.gameSettings.keyBindSneak).sb$setPressed(false);
 
         if (getBestDirection() == BotDirection.FORWARD) {
+            mc.thePlayer.rotationYaw = (EnumFacing.values()[SkyBot.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
             ((IKeyBinding) mc.gameSettings.keyBindSneak).sb$setPressed(true);
             ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(true);
         }
