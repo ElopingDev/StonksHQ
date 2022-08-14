@@ -15,7 +15,7 @@ pluginManagement {
 }
 
 rootProject.buildFileName = "root.gradle.kts"
-rootProject.name = "SkyBot"
+rootProject.name = "StonksHQ"
 
 arrayOf(
     "1.8.9"
