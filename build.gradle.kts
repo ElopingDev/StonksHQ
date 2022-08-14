@@ -7,6 +7,7 @@ plugins {
     id("net.kyori.blossom") version "1.3.1"
     id("gg.essential.multi-version")
     id("gg.essential.defaults")
+    id("org.ajoberstar.grgit") version "4.1.1"
 }
 
 val modGroup: String by project
@@ -15,6 +16,8 @@ val modId: String by project
 group = modGroup
 base.archivesName.set(modBaseName)
 version = "1.1.0"
+// The latest commit ID
+val buildId: String = grgit.log()[0].id ?: "dev"
 
 loom {
     noServerRunConfigs()
@@ -33,6 +36,7 @@ blossom {
     replaceToken("@VERSION@", version)
     replaceToken("@NAME@", modBaseName)
     replaceToken("@ID@", modId)
+    replaceToken("@BUILD@", buildId)
 }
 
 configurations {
