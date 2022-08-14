@@ -7,6 +7,7 @@ import gg.essential.api.commands.SubCommand;
 import gg.essential.api.utils.GuiUtil;
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.system.module.impl.farming.AutoFarm;
+import me.uwu.skybot.system.module.impl.farming.TestModule;
 import me.xtrm.skybot.system.module.ModuleManager;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -42,5 +43,13 @@ public class SkyBotCommand extends Command {
                 ) + EnumChatFormatting.RESET + "."
         );
         ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(value);
+    }
+
+    @SubCommand(
+            value = "test",
+            description = "TEST"
+    )
+    public void test() {
+        ModuleManager.INSTANCE.typed(TestModule.class).toggle();
     }
 }
