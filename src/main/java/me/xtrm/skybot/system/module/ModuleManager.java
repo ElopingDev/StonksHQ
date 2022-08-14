@@ -57,9 +57,11 @@ public enum ModuleManager {
 
     @SuppressWarnings("unchecked")
     public <T extends Module> T typed(Class<T> type) {
-        return (T) this.moduleMap.get(
-                type.getDeclaredAnnotation(Module.Metadata.class).id()
-        );
+        return (T) this.moduleMap.values()
+                .stream()
+                .filter(it -> it.getClass() == type)
+                .findFirst()
+                .orElse(null);
     }
 
     @Subscribe

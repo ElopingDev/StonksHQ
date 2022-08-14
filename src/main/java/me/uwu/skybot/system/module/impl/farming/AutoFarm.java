@@ -9,17 +9,13 @@ import me.uwu.skybot.event.impl.EventTick;
 import me.uwu.skybot.event.impl.EventUpdate;
 import me.uwu.skybot.struct.BotDirection;
 import me.uwu.skybot.utils.RenderUtils;
-import me.uwu.skybot.utils.Timer;
 import me.xtrm.skybot.accessor.IKeyBinding;
 import me.xtrm.skybot.system.module.Category;
 import me.xtrm.skybot.system.module.Module;
-import me.xtrm.skybot.utils.Renderer;
 import net.minecraft.block.Block;
-import net.minecraft.network.play.server.S08PacketPlayerPosLook;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
 
 import java.awt.*;
 import java.util.Random;
@@ -33,6 +29,19 @@ public class AutoFarm extends Module {
     private int dodo = 0;
     private boolean goRight = true;
     private boolean stuck = false;
+
+    @Override
+    protected void onToggle() {
+        EssentialAPI.getNotifications().push(
+                "AutOwO FAwArm",
+                "Farmbot is now " + (
+                        isEnabled()
+                                ? EnumChatFormatting.LIGHT_PURPLE + "EnAwAbled"
+                                : EnumChatFormatting.RED + "DisAwAbled"
+                ) + EnumChatFormatting.RESET + "."
+        );
+    }
+
     @Override
     public void onEnable() {
         mc.thePlayer.rotationYaw = (EnumFacing.values()[SkyBot.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);

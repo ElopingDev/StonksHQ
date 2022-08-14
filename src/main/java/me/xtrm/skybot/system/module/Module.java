@@ -21,8 +21,12 @@ public class Module {
 
     private boolean state;
 
-    public void toggle() {
+    public final void toggle() {
         this.setEnabled(!this.state);
+    }
+
+    public boolean isEnabled() {
+        return this.state;
     }
 
     public void setEnabled(boolean state) {

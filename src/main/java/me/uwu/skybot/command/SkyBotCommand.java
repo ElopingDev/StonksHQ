@@ -1,6 +1,5 @@
 package me.uwu.skybot.command;
 
-import gg.essential.api.EssentialAPI;
 import gg.essential.api.commands.Command;
 import gg.essential.api.commands.DefaultHandler;
 import gg.essential.api.commands.SubCommand;
@@ -9,7 +8,6 @@ import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.system.module.impl.farming.AutoFarm;
 import me.uwu.skybot.system.module.impl.farming.TestModule;
 import me.xtrm.skybot.system.module.ModuleManager;
-import net.minecraft.util.EnumChatFormatting;
 
 import java.util.Objects;
 
@@ -34,14 +32,6 @@ public class SkyBotCommand extends Command {
     public void farm() {
         boolean value = !SkyBot.INSTANCE.getConfig().autoFarm;
         SkyBot.INSTANCE.getConfig().autoFarm = value;
-        EssentialAPI.getNotifications().push(
-                "AutOwO FAwArm",
-                "Farmbot is now " + (
-                        value
-                                ? EnumChatFormatting.LIGHT_PURPLE + "EnAwAbled"
-                                : EnumChatFormatting.RED + "DisAwAbled"
-                ) + EnumChatFormatting.RESET + "."
-        );
         ModuleManager.INSTANCE.typed(AutoFarm.class).setEnabled(value);
     }
 
