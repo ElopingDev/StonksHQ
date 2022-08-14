@@ -2,6 +2,7 @@ package me.uwu.stonkshq.system.module;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
 import lombok.extern.log4j.Log4j2;
+import me.uwu.stonkshq.Consts;
 import me.uwu.stonkshq.StonksHQ;
 import me.uwu.stonkshq.event.impl.EventKeyboard;
 import org.reflections.Reflections;
@@ -9,7 +10,7 @@ import org.reflections.Reflections;
 import java.util.HashMap;
 import java.util.Map;
 
-@Log4j2(topic = "SkyBot/ModuleManager")
+@Log4j2(topic = Consts.NAME + "/ModuleManager")
 public enum ModuleManager {
     INSTANCE;
 

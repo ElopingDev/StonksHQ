@@ -8,7 +8,7 @@ import me.uwu.stonkshq.config.SkyBotConfig;
 import me.uwu.stonkshq.system.module.ModuleManager;
 
 @Getter
-@Log4j2(topic = "SkyBot")
+@Log4j2(topic = Consts.NAME)
 public enum StonksHQ {
     INSTANCE;
 
