@@ -11,7 +11,7 @@ import me.uwu.stonkshq.system.module.impl.misc.FastPlace;
 
 import java.io.File;
 
-public class SkyBotConfig extends Vigilant {
+public class StonksConfig extends Vigilant {
     @Property(
             type = PropertyType.SWITCH,
             name = "Enabled",
@@ -46,7 +46,7 @@ public class SkyBotConfig extends Vigilant {
     public boolean fastPlace = false;
 
     @SneakyThrows
-    public SkyBotConfig() {
+    public StonksConfig() {
         super(
                 new File("./config/skybot.toml"),
                 Consts.NAME + " (" + Consts.VERSION + ")"

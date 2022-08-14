@@ -4,7 +4,7 @@ import fr.shyrogan.post.configuration.impl.DefaultEventBusConfiguration;
 import fr.shyrogan.post.utils.DynamicClassLoader;
 import net.minecraft.launchwrapper.Launch;
 
-public class SkyBotBusConfiguration extends DefaultEventBusConfiguration {
+public class StonksBusConfiguration extends DefaultEventBusConfiguration {
     private final static DynamicClassLoader CLASS_LOADER =
             new DynamicClassLoader(Launch.classLoader);
 
