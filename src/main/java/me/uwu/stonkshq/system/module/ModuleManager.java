@@ -13,8 +13,9 @@ import java.util.Map;
 public enum ModuleManager {
     INSTANCE;
 
-    private final Reflections reflect =
-            new Reflections("me.uwu.skybot.system.module.impl");
+    private final Reflections reflect = new Reflections(
+            StonksHQ.class.getPackage().getName() + ".system.module.impl"
+    );
     private final Map<String, Module> moduleMap;
     private final Map<Module, Module.Metadata> moduleMetadataMap;
 

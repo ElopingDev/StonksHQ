@@ -2,8 +2,9 @@ package me.uwu.stonkshq.system.module;
 
 import fr.shyrogan.post.EventBus;
 import me.uwu.stonkshq.StonksHQ;
+import me.uwu.stonkshq.api.ui.font.IFontRenderer;
+import me.uwu.stonkshq.ui.font.FontManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.input.Keyboard;
 
 import java.lang.annotation.ElementType;
@@ -14,10 +15,12 @@ import java.lang.annotation.Target;
 public class Module {
     private static final EventBus BUS =
             StonksHQ.INSTANCE.getEventBus();
-    protected static final Minecraft mc =
+    protected static final Minecraft MC =
             Minecraft.getMinecraft();
-    protected static final FontRenderer fr =
-            Minecraft.getMinecraft().fontRendererObj;
+    protected static final IFontRenderer MC_FONT =
+            FontManager.INSTANCE.getFontRenderer("minecraft");
+    protected static final IFontRenderer CLIENT_FONT =
+            FontManager.INSTANCE.getFontRenderer("Bumblebee", 13);
 
     private boolean state;
 

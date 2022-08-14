@@ -43,20 +43,20 @@ public class AutoFarm extends Module {
 
     @Override
     public void onEnable() {
-        mc.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
-        mc.thePlayer.rotationPitch = -3.1f;
+        MC.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
+        MC.thePlayer.rotationPitch = -3.1f;
         super.onEnable();
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
-        ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindSneak).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindBack).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindLeft).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindRight).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindAttack).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindBack).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindAttack).sb$setPressed(false);
     }
 
     @Subscribe
@@ -69,31 +69,31 @@ public class AutoFarm extends Module {
         //mc.thePlayer.rotationPitch = -3.1f;
 
         BlockPos bottomPos = new BlockPos(
-                mc.thePlayer.posX,
-                mc.thePlayer.posY - 0.5f,
-                mc.thePlayer.posZ
+                MC.thePlayer.posX,
+                MC.thePlayer.posY - 0.5f,
+                MC.thePlayer.posZ
         );
 
-        Block bottomBlock = mc.theWorld.getBlockState(bottomPos).getBlock();
+        Block bottomBlock = MC.theWorld.getBlockState(bottomPos).getBlock();
 
-        ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindLeft).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindRight).sb$setPressed(false);
-        ((IKeyBinding) mc.gameSettings.keyBindSneak).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(false);
+        ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(false);
 
         if (getBestDirection() == BotDirection.FORWARD) {
-            mc.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
-            ((IKeyBinding) mc.gameSettings.keyBindSneak).sb$setPressed(true);
-            ((IKeyBinding) mc.gameSettings.keyBindForward).sb$setPressed(true);
+            MC.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
+            ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(true);
+            ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(true);
         }
         else if (getBestDirection() == BotDirection.LEFT)
-            ((IKeyBinding) mc.gameSettings.keyBindLeft).sb$setPressed(true);
+            ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(true);
         else if (getBestDirection() == BotDirection.RIGHT)
-            ((IKeyBinding) mc.gameSettings.keyBindRight).sb$setPressed(true);
+            ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(true);
 
         if (dodo <= 0) {
-            if ((mc.thePlayer.posY - ((int) mc.thePlayer.posY)) == .8125f) {
-                mc.thePlayer.jump();
+            if ((MC.thePlayer.posY - ((int) MC.thePlayer.posY)) == .8125f) {
+                MC.thePlayer.jump();
                 dodo = 40;
             }
         } else dodo--;
@@ -117,9 +117,9 @@ public class AutoFarm extends Module {
         Renderer.drawBlock(pos[2], getBlockColor(pos[2]));
 
         BlockPos bottomPos = new BlockPos(
-                mc.thePlayer.posX,
-                mc.thePlayer.posY - 0.5f,
-                mc.thePlayer.posZ
+                MC.thePlayer.posX,
+                MC.thePlayer.posY - 0.5f,
+                MC.thePlayer.posZ
         );
 
         Renderer.drawBlock(bottomPos, Color.BLUE);
@@ -136,9 +136,9 @@ public class AutoFarm extends Module {
         EnumFacing[] sides = new EnumFacing[3];
         EnumFacing facing = EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2];
         BlockPos playerPos = new BlockPos(
-                mc.thePlayer.posX,
-                mc.thePlayer.posY,
-                mc.thePlayer.posZ
+                MC.thePlayer.posX,
+                MC.thePlayer.posY,
+                MC.thePlayer.posZ
         );
 
         switch (facing) {
@@ -171,8 +171,8 @@ public class AutoFarm extends Module {
     }
 
     private boolean isPathBlock(BlockPos pos) {
-        return mc.theWorld.getBlockState(pos).getBlock().getUnlocalizedName().toLowerCase().contains("slab") ||
-                mc.theWorld.getBlockState(pos).getBlock().getUnlocalizedName().toLowerCase().contains("portal");
+        return MC.theWorld.getBlockState(pos).getBlock().getUnlocalizedName().toLowerCase().contains("slab") ||
+                MC.theWorld.getBlockState(pos).getBlock().getUnlocalizedName().toLowerCase().contains("portal");
     }
 
     public Color getBlockColor(BlockPos pos) {

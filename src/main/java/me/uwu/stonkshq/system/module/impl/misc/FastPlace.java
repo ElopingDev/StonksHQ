@@ -13,6 +13,6 @@ import me.uwu.stonkshq.system.module.Module;
 public class FastPlace extends Module {
     @Subscribe
     public void onTick(EventTick.Pre tick) {
-        ((IMinecraft)mc).sb$setRightClickDelayTimer(0);
+        ((IMinecraft) MC).sb$setRightClickDelayTimer(0);
     }
 }
