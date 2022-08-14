@@ -192,6 +192,8 @@ public class AutoFarm extends Module {
 
     @Subscribe
     public void onPacket(EventPacket.Receive eventPacket) {
+        if (!SkyBot.INSTANCE.getConfig().unstuck)
+            return;
         if (eventPacket.getPacket() instanceof S08PacketPlayerPosLook) {
             stuck = true;
             dodo = 5;
