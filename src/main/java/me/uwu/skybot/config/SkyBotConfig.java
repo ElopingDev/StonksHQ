@@ -1,13 +1,13 @@
-package me.xtrm.skybot.config;
+package me.uwu.skybot.config;
 
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;
 import lombok.SneakyThrows;
 import me.uwu.skybot.Consts;
+import me.uwu.skybot.system.module.ModuleManager;
 import me.uwu.skybot.system.module.impl.farming.AutoFarm;
 import me.uwu.skybot.system.module.impl.misc.FastPlace;
-import me.xtrm.skybot.system.module.ModuleManager;
 
 import java.io.File;
 

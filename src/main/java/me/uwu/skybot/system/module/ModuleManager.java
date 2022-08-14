@@ -1,4 +1,4 @@
-package me.xtrm.skybot.system.module;
+package me.uwu.skybot.system.module;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
 import lombok.extern.log4j.Log4j2;

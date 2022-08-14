@@ -1,4 +1,4 @@
-package me.xtrm.skybot.mixins.entity;
+package me.uwu.skybot.mixins.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;

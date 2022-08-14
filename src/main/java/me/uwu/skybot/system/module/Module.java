@@ -1,4 +1,4 @@
-package me.xtrm.skybot.system.module;
+package me.uwu.skybot.system.module;
 
 import fr.shyrogan.post.EventBus;
 import me.uwu.skybot.SkyBot;

@@ -1,6 +1,5 @@
 package me.uwu.skybot.utils;
 
-import me.xtrm.skybot.utils.Renderer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 

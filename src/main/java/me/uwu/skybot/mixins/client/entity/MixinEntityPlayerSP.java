@@ -1,10 +1,10 @@
-package me.xtrm.skybot.mixins.client.entity;
+package me.uwu.skybot.mixins.client.entity;
 
 import fr.shyrogan.post.EventBus;
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventMotion;
 import me.uwu.skybot.event.impl.EventUpdate;
-import me.xtrm.skybot.mixins.entity.MixinEntity;
+import me.uwu.skybot.mixins.entity.MixinEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;

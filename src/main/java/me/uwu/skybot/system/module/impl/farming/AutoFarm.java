@@ -9,9 +9,9 @@ import me.uwu.skybot.event.impl.EventTick;
 import me.uwu.skybot.event.impl.EventUpdate;
 import me.uwu.skybot.struct.BotDirection;
 import me.uwu.skybot.utils.RenderUtils;
-import me.xtrm.skybot.accessor.IKeyBinding;
-import me.xtrm.skybot.system.module.Category;
-import me.xtrm.skybot.system.module.Module;
+import me.uwu.skybot.accessor.IKeyBinding;
+import me.uwu.skybot.system.module.Category;
+import me.uwu.skybot.system.module.Module;
 import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
@@ -28,7 +28,6 @@ public class AutoFarm extends Module {
     private static final Random RANDOM = new Random();
     private int dodo = 0;
     private boolean goRight = true;
-    private boolean stuck = false;
 
     @Override
     protected void onToggle() {

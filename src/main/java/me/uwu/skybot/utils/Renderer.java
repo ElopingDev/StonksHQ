@@ -1,6 +1,5 @@
-package me.xtrm.skybot.utils;
+package me.uwu.skybot.utils;
 
-import lombok.experimental.Helper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

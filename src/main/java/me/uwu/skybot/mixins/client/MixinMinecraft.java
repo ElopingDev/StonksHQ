@@ -1,10 +1,10 @@
-package me.xtrm.skybot.mixins.client;
+package me.uwu.skybot.mixins.client;
 
 import fr.shyrogan.post.EventBus;
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.event.impl.EventKeyboard;
 import me.uwu.skybot.event.impl.EventTick;
-import me.xtrm.skybot.accessor.IMinecraft;
+import me.uwu.skybot.accessor.IMinecraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;

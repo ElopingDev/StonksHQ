@@ -1,4 +1,4 @@
-package me.xtrm.skybot.mixins.network;
+package me.uwu.skybot.mixins.network;
 
 import fr.shyrogan.post.EventBus;
 import io.netty.channel.ChannelHandlerContext;

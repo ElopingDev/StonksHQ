@@ -1,4 +1,4 @@
-package me.xtrm.skybot.mixins.client.gui;
+package me.uwu.skybot.mixins.client.gui;
 
 import fr.shyrogan.post.EventBus;
 import me.uwu.skybot.SkyBot;

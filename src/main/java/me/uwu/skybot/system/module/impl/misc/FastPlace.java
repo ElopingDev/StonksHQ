@@ -2,9 +2,9 @@ package me.uwu.skybot.system.module.impl.misc;
 
 import fr.shyrogan.post.receiver.annotation.Subscribe;
 import me.uwu.skybot.event.impl.EventTick;
-import me.xtrm.skybot.accessor.IMinecraft;
-import me.xtrm.skybot.system.module.Category;
-import me.xtrm.skybot.system.module.Module;
+import me.uwu.skybot.accessor.IMinecraft;
+import me.uwu.skybot.system.module.Category;
+import me.uwu.skybot.system.module.Module;
 
 @Module.Metadata(
         id = "fast-place",

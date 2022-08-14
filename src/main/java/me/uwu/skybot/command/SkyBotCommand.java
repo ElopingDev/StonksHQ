@@ -7,7 +7,7 @@ import gg.essential.api.utils.GuiUtil;
 import me.uwu.skybot.SkyBot;
 import me.uwu.skybot.system.module.impl.farming.AutoFarm;
 import me.uwu.skybot.system.module.impl.farming.TestModule;
-import me.xtrm.skybot.system.module.ModuleManager;
+import me.uwu.skybot.system.module.ModuleManager;
 
 import java.util.Objects;
 

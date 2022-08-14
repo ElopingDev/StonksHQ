@@ -1,4 +1,4 @@
-package me.xtrm.skybot.system.module;
+package me.uwu.skybot.system.module;
 
 public enum Category {
     COMBAT,

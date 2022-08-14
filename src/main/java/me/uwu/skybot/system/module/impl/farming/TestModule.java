@@ -5,8 +5,8 @@ import me.uwu.skybot.event.impl.EventPacket;
 import me.uwu.skybot.event.impl.EventRender;
 import me.uwu.skybot.event.impl.EventTick;
 import me.uwu.skybot.event.impl.EventUpdate;
-import me.xtrm.skybot.system.module.Category;
-import me.xtrm.skybot.system.module.Module;
+import me.uwu.skybot.system.module.Category;
+import me.uwu.skybot.system.module.Module;
 
 @Module.Metadata(id = "x", category = Category.FARMING)
 public class TestModule extends Module {
