@@ -14,16 +14,16 @@ import java.io.File;
 public class StonksConfig extends Vigilant {
     @Property(
             type = PropertyType.SWITCH,
-            name = "Enabled",
-            description = "Is this thing on?",
+            name = "EnAwAbled",
+            description = "I-Is this thing OwOn?",
             category = "Auto Farm"
     )
     public boolean autoFarm = false;
 
     @Property(
             type = PropertyType.SELECTOR,
-            name = "Facing",
-            description = "Where the fuck to look at.",
+            name = "FAwAcing",
+            description = "Whewe the fwick t-t-t-to wook at >.<",
             category = "Auto Farm",
             options = {"North", "South", "West", "East"}
     )
@@ -31,24 +31,16 @@ public class StonksConfig extends Vigilant {
 
     @Property(
             type = PropertyType.SWITCH,
-            name = "Unstuck",
-            description = "Stops you from being a whiney bitch.",
+            name = "UwUnstUwUck",
+            description = "Stawps you fwom being a whinyey bitch.",
             category = "Auto Farm"
     )
     public boolean unstuck = true;
 
     @Property(
             type = PropertyType.SWITCH,
-            name = "Auto-Reconnect",
-            description = "Eloping sale noir.",
-            category = "Auto Farm"
-    )
-    public boolean autoReconnect = true;
-
-    @Property(
-            type = PropertyType.SWITCH,
-            name = "Enabled",
-            description = "brrrrrrrrrrrrrrrrrrrrrrrrrr.",
+            name = "EnAwAbled",
+            description = "Pwace bwocks vewy fast",
             category = "Fast Place"
     )
     public boolean fastPlace = false;

@@ -19,7 +19,7 @@ public class SkyBotCommand extends Command {
     @DefaultHandler
     @SubCommand(
             value = "gui",
-            description = "Open the configuration gui."
+            description = "OwOpen the cOwOnfiguwation GUwUI.."
     )
     public void openGui() {
         GuiUtil.open(Objects.requireNonNull(StonksHQ.INSTANCE.getConfig().gui()));
