@@ -39,6 +39,14 @@ public class StonksConfig extends Vigilant {
 
     @Property(
             type = PropertyType.SWITCH,
+            name = "Auto-Reconnect",
+            description = "Eloping sale noir.",
+            category = "Auto Farm"
+    )
+    public boolean autoReconnect = true;
+
+    @Property(
+            type = PropertyType.SWITCH,
             name = "Enabled",
             description = "brrrrrrrrrrrrrrrrrrrrrrrrrr.",
             category = "Fast Place"

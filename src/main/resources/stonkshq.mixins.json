@@ -9,7 +9,9 @@
   "client": [
     "client.MixinMinecraft",
     "client.entity.MixinEntityPlayerSP",
+    "client.gui.MixinGuiDisconnected",
     "client.gui.MixinGuiIngame",
+    "client.gui.MixinGuiScreen",
     "client.gui.MixinGuiSpectator",
     "client.renderer.MixinEntityRenderer",
     "client.settings.MixinKeyBinding"

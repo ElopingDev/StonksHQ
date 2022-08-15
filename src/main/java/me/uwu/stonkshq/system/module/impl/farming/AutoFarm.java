@@ -145,7 +145,6 @@ public class AutoFarm extends Module {
         Renderer.drawBlock(bottomPos, Color.BLUE);
     }
 
-
     @Subscribe
     public void onPacket(EventPacket.Receive e) {
         if (e.getPacket() instanceof S07PacketRespawn)
