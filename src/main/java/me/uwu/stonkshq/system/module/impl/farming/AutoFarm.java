@@ -12,7 +12,11 @@ import me.uwu.stonkshq.mixin.accessor.IKeyBinding;
 import me.uwu.stonkshq.system.module.Category;
 import me.uwu.stonkshq.system.module.Module;
 import me.uwu.stonkshq.utils.Renderer;
+import me.uwu.stonkshq.utils.SkyBlockUtils;
 import net.minecraft.block.Block;
+import net.minecraft.network.login.server.S00PacketDisconnect;
+import net.minecraft.network.play.server.S07PacketRespawn;
+import net.minecraft.network.play.server.S40PacketDisconnect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
@@ -28,6 +32,7 @@ public class AutoFarm extends Module {
     private static final Random RANDOM = new Random();
     private int dodo = 0;
     private boolean goRight = true;
+    private boolean canWork = false;
 
     @Override
     protected void onToggle() {
@@ -45,6 +50,7 @@ public class AutoFarm extends Module {
     public void onEnable() {
         MC.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
         MC.thePlayer.rotationPitch = -3.1f;
+        canWork = false;
         super.onEnable();
     }
 
@@ -66,37 +72,51 @@ public class AutoFarm extends Module {
 
     @Subscribe
     public void onPre(EventUpdate.Pre e) {
-        //mc.thePlayer.rotationPitch = -3.1f;
+        if (canWork) {
+            BlockPos bottomPos = new BlockPos(
+                    MC.thePlayer.posX,
+                    MC.thePlayer.posY - 0.5f,
+                    MC.thePlayer.posZ
+            );
 
-        BlockPos bottomPos = new BlockPos(
-                MC.thePlayer.posX,
-                MC.thePlayer.posY - 0.5f,
-                MC.thePlayer.posZ
-        );
+            Block bottomBlock = MC.theWorld.getBlockState(bottomPos).getBlock();
 
-        Block bottomBlock = MC.theWorld.getBlockState(bottomPos).getBlock();
+            ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(false);
+            ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(false);
+            ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(false);
+            ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(false);
 
-        ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(false);
-        ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(false);
-        ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(false);
-        ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(false);
+            if (getBestDirection() == BotDirection.FORWARD) {
+                MC.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
+                ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(true);
+                ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(true);
+            } else if (getBestDirection() == BotDirection.LEFT)
+                ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(true);
+            else if (getBestDirection() == BotDirection.RIGHT)
+                ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(true);
 
-        if (getBestDirection() == BotDirection.FORWARD) {
-            MC.thePlayer.rotationYaw = (EnumFacing.values()[StonksHQ.INSTANCE.getConfig().enumFacingOrd + 2].getHorizontalIndex() * 90);
-            ((IKeyBinding) MC.gameSettings.keyBindSneak).sb$setPressed(true);
-            ((IKeyBinding) MC.gameSettings.keyBindForward).sb$setPressed(true);
-        }
-        else if (getBestDirection() == BotDirection.LEFT)
-            ((IKeyBinding) MC.gameSettings.keyBindLeft).sb$setPressed(true);
-        else if (getBestDirection() == BotDirection.RIGHT)
-            ((IKeyBinding) MC.gameSettings.keyBindRight).sb$setPressed(true);
-
-        if (dodo <= 0) {
-            if ((MC.thePlayer.posY - ((int) MC.thePlayer.posY)) == .8125f) {
-                MC.thePlayer.jump();
-                dodo = 40;
+            if (dodo <= 0) {
+                if ((MC.thePlayer.posY - ((int) MC.thePlayer.posY)) == .8125f) {
+                    MC.thePlayer.jump();
+                    dodo = 40;
+                }
+            } else dodo--;
+        } else {
+            if (MC.thePlayer.ticksExisted % 30 == 0) {
+                SkyBlockUtils.IslandType islandType = SkyBlockUtils.getCurrentIslandType(MC);
+                if (islandType == SkyBlockUtils.IslandType.OWN_ISLAND) {
+                    canWork = true;
+                } else {
+                    if (islandType == SkyBlockUtils.IslandType.HYPIXEL_LOBBY || islandType == SkyBlockUtils.IslandType.UNKNOWN) {
+                        MC.thePlayer.sendChatMessage("/play skyblock");
+                    } else if (islandType == SkyBlockUtils.IslandType.HUB_ISLAND) {
+                        MC.thePlayer.sendChatMessage("/is");
+                    } else {
+                        MC.thePlayer.sendChatMessage("/lobby");
+                    }
+                }
             }
-        } else dodo--;
+        }
     }
 
     @Subscribe
@@ -128,7 +148,8 @@ public class AutoFarm extends Module {
 
     @Subscribe
     public void onPacket(EventPacket.Receive e) {
-
+        if (e.getPacket() instanceof S07PacketRespawn)
+            canWork = false;
     }
 
     private BlockPos[] getPositions() {
