@@ -7,16 +7,14 @@ import me.uwu.stonkshq.event.impl.EventPacket;
 import me.uwu.stonkshq.event.impl.EventRender;
 import me.uwu.stonkshq.event.impl.EventTick;
 import me.uwu.stonkshq.event.impl.EventUpdate;
-import me.uwu.stonkshq.struct.BotDirection;
 import me.uwu.stonkshq.mixin.accessor.IKeyBinding;
+import me.uwu.stonkshq.struct.BotDirection;
 import me.uwu.stonkshq.system.module.Category;
 import me.uwu.stonkshq.system.module.Module;
 import me.uwu.stonkshq.utils.Renderer;
 import me.uwu.stonkshq.utils.SkyBlockUtils;
 import net.minecraft.block.Block;
-import net.minecraft.network.login.server.S00PacketDisconnect;
 import net.minecraft.network.play.server.S07PacketRespawn;
-import net.minecraft.network.play.server.S40PacketDisconnect;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
@@ -72,6 +70,9 @@ public class AutoFarm extends Module {
 
     @Subscribe
     public void onPre(EventUpdate.Pre e) {
+        if (MC.thePlayer.ticksExisted % 36000 == 35998)
+            MC.thePlayer.sendChatMessage("/lobby");
+
         if (canWork) {
             BlockPos bottomPos = new BlockPos(
                     MC.thePlayer.posX,
@@ -102,7 +103,7 @@ public class AutoFarm extends Module {
                 }
             } else dodo--;
         } else {
-            if (MC.thePlayer.ticksExisted % 30 == 0) {
+            if (MC.thePlayer.ticksExisted % 80 == 0) {
                 SkyBlockUtils.IslandType islandType = SkyBlockUtils.getCurrentIslandType(MC);
                 if (islandType == SkyBlockUtils.IslandType.OWN_ISLAND) {
                     canWork = true;
