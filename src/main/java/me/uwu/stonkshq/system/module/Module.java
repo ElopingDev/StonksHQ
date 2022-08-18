@@ -20,7 +20,7 @@ public class Module {
     protected static final IFontRenderer MC_FONT =
             FontManager.INSTANCE.getFontRenderer("minecraft");
     protected static final IFontRenderer CLIENT_FONT =
-            FontManager.INSTANCE.getFontRenderer("ProductSans", 17);
+            FontManager.INSTANCE.getFontRenderer("Honeybee", 17);
 
     private boolean state;
 

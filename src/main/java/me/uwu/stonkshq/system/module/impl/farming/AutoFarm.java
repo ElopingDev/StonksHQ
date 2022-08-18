@@ -112,6 +112,7 @@ public class AutoFarm extends Module {
                         MC.thePlayer.sendChatMessage("/play skyblock");
                     } else if (islandType == SkyBlockUtils.IslandType.HUB_ISLAND) {
                         MC.thePlayer.sendChatMessage("/is");
+
                     } else {
                         MC.thePlayer.sendChatMessage("/lobby");
                     }
@@ -218,6 +219,7 @@ public class AutoFarm extends Module {
         if (canGoRight() && canGoLeft()) {
             if (goRight)
                 return BotDirection.RIGHT;
+
             else return BotDirection.LEFT;
         }
         if (canGoRight()) {
